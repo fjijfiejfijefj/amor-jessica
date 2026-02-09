@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Jéssica ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff4d6d, #ff758f, #ff8fa3);
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Corações */
+.heart {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  background: red;
+  transform: rotate(45deg);
+  animation: fall 8s linear infinite;
+  opacity: 0.6;
+}
+.heart::before, .heart::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: red;
+  border-radius: 50%;
+}
+.heart::before { top: -8px; }
+.heart::after { left: -8px; }
+
+@keyframes fall {
+  from { transform: translateY(-100px) rotate(45deg); }
+  to { transform: translateY(110vh) rotate(45deg); }
+}
+
+/* Carta */
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.card {
+  background: rgba(255,255,255,0.18);
+  border-radius: 25px;
+  padding: 35px;
+  max-width: 520px;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 1.8s ease;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3.2rem;
+  margin-bottom: 10px;
+}
+
+.text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  min-height: 190px;
+}
+
+.counter {
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+/* Botões */
+.button {
+  margin-top: 18px;
+  padding: 14px 28px;
+  background: white;
+  color: #ff4d6d;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button:hover { transform: scale(1.1); }
+
+.buttons {
+  display: none;
+  margin-top: 20px;
+  gap: 15px;
+  justify-content: center;
+}
+
+.buttons button {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  background: white;
+  color: #ff4d6d;
+  transition: 0.3s;
+}
+
+.buttons button:hover {
+  transform: scale(1.15);
+  background: #ffe3ea;
+}
+
+/* Resposta final */
+.answer {
+  display: none;
+  margin-top: 25px;
+  font-size: 1.15rem;
+  animation: pop 0.6s ease forwards;
+}
+
+@keyframes pop {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.big-heart {
+  font-size: 4rem;
+  animation: beat 1.2s infinite;
+}
+
+@keyframes beat {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* Galeria */
+.gallery {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 30px auto 60px;
+  flex-wrap: wrap;
+}
+
+.gallery img {
+  width: 120px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: 0.4s;
+}
+
+.gallery img:hover {
+  transform: scale(1.3);
+  z-index: 10;
+}
+
+/* Som */
+.sound {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  color: #ff4d6d;
+  padding: 12px 18px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 20;
+}
+
+/* Confetes */
+.confetti {
+  position: fixed;
+  width: 8px;
+  height: 14px;
+  background: white;
+  top: -20px;
+  animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Música -->
+<audio id="musica" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<div class="sound" onclick="ativarSom()">Ativar som 🎵</div>
+
+<!-- Corações -->
+<script>
+for (let i = 0; i < 35; i++) {
+  const h = document.createElement('div');
+  h.className = 'heart';
+  h.style.left = Math.random() * 100 + 'vw';
+  h.style.animationDuration = (5 + Math.random() * 5) + 's';
+  document.body.appendChild(h);
+}
+</script>
+
+<div class="container">
+  <div class="card">
+    <div class="title">Jéssica Esteves ❤️</div>
+
+    <div class="text" id="typewriter"></div>
+
+    <div class="counter" id="contador"></div>
+
+    <div class="button" onclick="mostrarPedido()">Tenho algo muito importante para te perguntar 💌</div>
+
+    <div class="buttons" id="botoes">
+      <button onclick="responder()">Sim ❤️</button>
+      <button onclick="responder()">Óbvio 😍</button>
+    </div>
+
+    <div class="answer" id="resposta">
+      Obrigado por seres a minha pessoa.<br>
+      Prometo escolher-te todos os dias.<br><br>
+      Com todo o meu amor,<br>
+      <strong>Gustavo Reis</strong>
+      <div class="big-heart">❤️</div>
+    </div>
+  </div>
+</div>
+
+<div class="gallery">
+  <img src="foto1.jpg">
+  <img src="foto2.jpg">
+  <img src="foto3.jpg">
+  <img src="foto4.jpg">
+</div>
+
+<script>
+/* Texto letra a letra */
+const texto = `
+Meu amor,
+
+Desde o dia 5 de novembro de 2024
+que a minha vida mudou por completo.
+
+Não foi só amor.
+Foi casa, paz e certeza.
+
+E se houver mil caminhos,
+eu escolho-te em todos.
+`;
+
+let i = 0;
+function escrever() {
+  if (i < texto.length) {
+    document.getElementById("typewriter").innerHTML += texto.charAt(i);
+    i++;
+    setTimeout(escrever, 45);
+  }
+}
+escrever();
+
+/* Contador */
+const inicio = new Date("2024-11-05T00:00:00");
+function atualizar() {
+  const agora = new Date();
+  const diff = agora - inicio;
+  const dias = Math.floor(diff / (1000*60*60*24));
+  const horas = Math.floor((diff / (1000*60*60)) % 24);
+  const minutos = Math.floor((diff / (1000*60)) % 60);
+  document.getElementById("contador").innerHTML =
+    `Juntos há ${dias} dias, ${horas} horas e ${minutos} minutos ❤️`;
+}
+setInterval(atualizar, 1000);
+atualizar();
+
+/* Pedido */
+function mostrarPedido() {
+  document.getElementById("botoes").style.display = "flex";
+}
+
+/* Confetes */
+function soltarConfetes() {
+  for (let i = 0; i < 80; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.background = ["#fff","#ffccd5","#ffe066","#ffd6ff"][Math.floor(Math.random()*4)];
+    c.style.animationDuration = (2 + Math.random() * 2) + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 3000);
+  }
+}
+
+/* Resposta */
+function responder() {
+  document.getElementById("botoes").style.display = "none";
+  document.getElementById("resposta").style.display = "block";
+  soltarConfetes();
+}
+
+/* Som */
+function ativarSom() {
+  document.getElementById("musica").play();
+}
+</script>
+
+</body>
+</html>
