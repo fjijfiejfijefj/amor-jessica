@@ -2,91 +2,110 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<title>Para Jéssica Esteves ❤️</title>
+<title>Para Jéssica ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+*{margin:0;padding:0;box-sizing:border-box;}
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  overflow-x: hidden;
+body{
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  overflow-x:hidden;
   text-align:center;
   color:white;
 }
 
-/* Corações fundo */
-.heart {
-  position:absolute;
-  color:rgba(255,255,255,0.4);
-  font-size:20px;
-  animation:float 10s linear infinite;
+/* Fundo suave animado */
+body::before{
+  content:"";
+  position:fixed;
+  width:200%;
+  height:200%;
+  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.15),transparent 40%);
+  animation:moveBg 15s infinite alternate ease-in-out;
 }
-@keyframes float {
-  from { transform:translateY(100vh); }
-  to { transform:translateY(-10vh); }
+@keyframes moveBg{
+  from{transform:translate(-10%,-10%);}
+  to{transform:translate(10%,10%);}
 }
 
-/* Fotos fora da carta */
-.gallery {
+/* Nome com brilho */
+h1{
+  font-family:'Great Vibes',cursive;
+  font-size:3.2rem;
+  margin-top:30px;
+  background:linear-gradient(90deg,#fff,#ffe6f0,#fff);
+  background-size:200%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 3s infinite linear;
+}
+@keyframes shine{
+  from{background-position:0%;}
+  to{background-position:200%;}
+}
+
+/* Galeria */
+.gallery{
   display:flex;
   justify-content:center;
   gap:15px;
-  margin-top:20px;
+  margin:20px;
   flex-wrap:wrap;
 }
-.gallery img {
+.gallery img{
   width:120px;
   border-radius:15px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+  box-shadow:0 10px 25px rgba(0,0,0,0.4);
   transition:0.4s;
 }
-.gallery img:hover {
+.gallery img:hover{
   transform:scale(1.1);
 }
 
 /* Carta */
-.card {
+.card{
   background:rgba(255,255,255,0.2);
-  backdrop-filter:blur(12px);
+  backdrop-filter:blur(15px);
   border-radius:25px;
   padding:40px 25px;
-  max-width:500px;
-  margin:40px auto;
-  box-shadow:0 20px 50px rgba(0,0,0,0.3);
+  max-width:520px;
+  margin:30px auto;
+  box-shadow:0 20px 50px rgba(0,0,0,0.4);
 }
 
-h1 {
-  font-family:'Great Vibes', cursive;
-  font-size:3rem;
-  margin-bottom:20px;
-}
-
-#typed {
-  min-height:120px;
+#typed{
+  min-height:130px;
   font-size:1.1rem;
 }
 
-.counter {
-  margin-top:20px;
+.counter{
+  margin-top:15px;
   font-weight:600;
 }
 
-/* Pergunta */
-.question {
-  margin-top:30px;
+/* Pergunta escondida até o fim */
+.question{
+  opacity:0;
+  margin-top:25px;
   font-size:1.4rem;
-  font-weight:600;
+  transition:1s;
 }
 
-.buttons {
+.show{
+  opacity:1;
+}
+
+/* Botões */
+.buttons{
   margin-top:20px;
+  position:relative;
 }
 
-button {
+button{
   padding:15px 25px;
   border:none;
   border-radius:30px;
@@ -96,35 +115,37 @@ button {
   transition:0.3s;
 }
 
-.yes {
+.yes{
   background:white;
   color:#ff4d6d;
 }
 
-.obvio {
+.obvio{
   background:#ff4d6d;
   color:white;
+  position:absolute;
 }
 
-button:hover {
+button:hover{
   transform:scale(1.1);
 }
 
-/* Confetes */
-.confetti {
+/* Explosão de corações */
+.heart{
   position:fixed;
-  width:10px;
-  height:10px;
-  background:yellow;
-  top:-10px;
-  animation:confettiFall 3s linear forwards;
+  font-size:20px;
+  animation:explode 2s ease-out forwards;
 }
-@keyframes confettiFall {
-  to { transform:translateY(110vh) rotate(720deg); }
+
+@keyframes explode{
+  to{
+    transform:translateY(-200px) scale(2);
+    opacity:0;
+  }
 }
 
 /* Música botão */
-.music-btn {
+.music-btn{
   margin-top:20px;
   background:white;
   color:#ff4d6d;
@@ -138,6 +159,8 @@ button:hover {
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
+<h1>Jéssica Esteves ❤️</h1>
+
 <div class="gallery">
   <img src="foto1.jpg">
   <img src="foto2.jpg">
@@ -146,18 +169,16 @@ button:hover {
 </div>
 
 <div class="card">
-  <h1>Jéssica Esteves ❤️</h1>
   <div id="typed"></div>
-
   <div class="counter" id="counter"></div>
 
-  <div class="question">
+  <div class="question" id="question">
     Queres continuar esta história comigo para sempre?
   </div>
 
-  <div class="buttons">
+  <div class="buttons" id="buttons" style="display:none;">
     <button class="yes" onclick="celebrar()">Sim ❤️</button>
-    <button class="obvio" onclick="celebrar()">Óbvio 😍</button>
+    <button class="obvio" id="runBtn">Óbvio 😍</button>
   </div>
 
   <button class="music-btn" onclick="playMusic()">Ativar música 🎵</button>
@@ -176,45 +197,51 @@ e a melhor parte de todos os meus dias.
 
 Eu amo-te mais do que alguma vez consegui explicar. ❤️`;
 
-let i = 0;
-function typeWriter() {
-  if (i < text.length) {
-    document.getElementById("typed").innerHTML += text.charAt(i);
+let i=0;
+function typeWriter(){
+  if(i<text.length){
+    document.getElementById("typed").innerHTML+=text.charAt(i);
     i++;
-    setTimeout(typeWriter, 40);
+    setTimeout(typeWriter,40);
+  } else {
+    document.getElementById("question").classList.add("show");
+    document.getElementById("buttons").style.display="block";
   }
 }
 typeWriter();
 
 // Contador
-const startDate = new Date("2024-11-05");
-function updateCounter() {
-  const now = new Date();
-  const diff = now - startDate;
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  document.getElementById("counter").innerHTML =
-    `Estamos juntos há ${days} dias ❤️`;
-}
-updateCounter();
+const startDate=new Date("2024-11-05");
+const now=new Date();
+const diff=now-startDate;
+const days=Math.floor(diff/(1000*60*60*24));
+document.getElementById("counter").innerHTML=`Estamos juntos há ${days} dias ❤️`;
 
 // Música
 function playMusic(){
   document.getElementById("music").play();
 }
 
-// Confetes
+// Botão que foge
+const runBtn=document.getElementById("runBtn");
+runBtn.addEventListener("mouseover",()=>{
+  runBtn.style.top=Math.random()*60+"px";
+  runBtn.style.left=Math.random()*200+"px";
+});
+
+// Explosão de corações
 function celebrar(){
-  for(let i=0;i<80;i++){
-    let conf = document.createElement("div");
-    conf.className="confetti";
-    conf.style.left=Math.random()*100+"vw";
-    conf.style.background=`hsl(${Math.random()*360},100%,50%)`;
-    document.body.appendChild(conf);
-    setTimeout(()=>conf.remove(),3000);
+  for(let i=0;i<40;i++){
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=(window.innerWidth/2)+"px";
+    heart.style.top=(window.innerHeight/2)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),2000);
   }
 }
 </script>
 
 </body>
 </html>
-
