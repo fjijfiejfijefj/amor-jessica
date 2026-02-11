@@ -2,15 +2,14 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<title>Para Jéssica ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Jéssica ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-
 body{
+  margin:0;
   font-family:'Poppins',sans-serif;
   background:linear-gradient(135deg,#ff758c,#ff7eb3);
   overflow-x:hidden;
@@ -18,101 +17,83 @@ body{
   color:white;
 }
 
-/* Fundo suave animado */
-body::before{
-  content:"";
-  position:fixed;
-  width:200%;
-  height:200%;
-  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.15),transparent 40%);
-  animation:moveBg 15s infinite alternate ease-in-out;
-}
-@keyframes moveBg{
-  from{transform:translate(-10%,-10%);}
-  to{transform:translate(10%,10%);}
-}
-
-/* Nome com brilho */
 h1{
   font-family:'Great Vibes',cursive;
-  font-size:3.2rem;
+  font-size:3.5rem;
   margin-top:30px;
-  background:linear-gradient(90deg,#fff,#ffe6f0,#fff);
-  background-size:200%;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:shine 3s infinite linear;
-}
-@keyframes shine{
-  from{background-position:0%;}
-  to{background-position:200%;}
 }
 
-/* Galeria */
+.glow{
+  background: linear-gradient(90deg,#fff,#ffe6f0,#fff);
+  background-size:200% auto;
+  color:#fff;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine{
+  to{background-position:200% center;}
+}
+
+.counter{
+  margin-top:10px;
+  font-size:1.1rem;
+}
+
 .gallery{
   display:flex;
+  flex-wrap:wrap;
   justify-content:center;
   gap:15px;
-  margin:20px;
-  flex-wrap:wrap;
+  margin:30px;
 }
+
 .gallery img{
-  width:120px;
-  border-radius:15px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.4);
+  width:200px;
+  height:200px;
+  object-fit:cover;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
   transition:0.4s;
 }
+
 .gallery img:hover{
   transform:scale(1.1);
 }
 
-/* Carta */
 .card{
-  background:rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.15);
   backdrop-filter:blur(15px);
+  padding:30px;
   border-radius:25px;
-  padding:40px 25px;
-  max-width:520px;
+  width:80%;
+  max-width:600px;
   margin:30px auto;
-  box-shadow:0 20px 50px rgba(0,0,0,0.4);
+  box-shadow:0 15px 35px rgba(0,0,0,0.2);
 }
 
-#typed{
-  min-height:130px;
-  font-size:1.1rem;
+.typing{
+  font-size:1.2rem;
+  min-height:120px;
 }
 
-.counter{
-  margin-top:15px;
-  font-weight:600;
-}
-
-/* Pergunta escondida até o fim */
-.question{
-  opacity:0;
-  margin-top:25px;
-  font-size:1.4rem;
-  transition:1s;
-}
-
-.show{
-  opacity:1;
-}
-
-/* Botões */
 .buttons{
   margin-top:20px;
+  display:flex;
+  justify-content:center;
+  gap:20px;
   position:relative;
+  height:100px;
 }
 
 button{
-  padding:15px 25px;
+  padding:15px 30px;
   border:none;
-  border-radius:30px;
-  margin:10px;
+  border-radius:40px;
   font-size:1rem;
   cursor:pointer;
-  transition:0.3s;
+  transition:0.2s;
 }
 
 .yes{
@@ -123,28 +104,27 @@ button{
 .obvio{
   background:#ff4d6d;
   color:white;
-  position:absolute;
+  position:relative;
 }
 
-button:hover{
-  transform:scale(1.1);
+#finalMessage{
+  display:none;
+  margin-top:30px;
+  font-size:1.5rem;
+  font-family:'Great Vibes',cursive;
 }
 
-/* Explosão de corações */
 .heart{
   position:fixed;
   font-size:20px;
-  animation:explode 2s ease-out forwards;
+  animation:fall 3s linear forwards;
 }
 
-@keyframes explode{
-  to{
-    transform:translateY(-200px) scale(2);
-    opacity:0;
-  }
+@keyframes fall{
+  0%{transform:translateY(-10vh) scale(1);opacity:1;}
+  100%{transform:translateY(100vh) scale(0.5);opacity:0;}
 }
 
-/* Música botão */
 .music-btn{
   margin-top:20px;
   background:white;
@@ -152,14 +132,14 @@ button:hover{
 }
 </style>
 </head>
-
 <body>
 
-<audio id="music" loop>
-  <source src="musica.mp3" type="audio/mpeg">
-</audio>
+<h1>Para <span class="glow">Jéssica Esteves</span> ❤️</h1>
 
-<h1>Jéssica Esteves ❤️</h1>
+<div class="counter" id="counter"></div>
+
+<button class="music-btn" onclick="playMusic()">Ativar música 🎵</button>
+<audio id="music" src="musica.mp3"></audio>
 
 <div class="gallery">
   <img src="foto1.jpg">
@@ -169,77 +149,76 @@ button:hover{
 </div>
 
 <div class="card">
-  <div id="typed"></div>
-  <div class="counter" id="counter"></div>
+  <div class="typing" id="typing"></div>
 
-  <div class="question" id="question">
-    Queres continuar esta história comigo para sempre?
-  </div>
-
-  <div class="buttons" id="buttons" style="display:none;">
-    <button class="yes" onclick="celebrar()">Sim ❤️</button>
+  <div class="buttons">
+    <button class="yes" onclick="explodeHearts()">Sim ❤️</button>
     <button class="obvio" id="runBtn">Óbvio 😍</button>
   </div>
 
-  <button class="music-btn" onclick="playMusic()">Ativar música 🎵</button>
-
-  <div style="margin-top:30px;">
-    Com todo o meu amor,<br>
-    <b>Gustavo Reis</b>
+  <div id="finalMessage">
+    Sabia que ias dizer que sim… ❤️  
+    Quero continuar a viver esta história contigo todos os dias.  
+    <br><br>
+    Com todo o meu amor,  
+    <br>
+    Gustavo Reis 💌
   </div>
 </div>
 
 <script>
-// Texto letra a letra
-const text = `Desde o dia 5 de novembro de 2024 que a minha vida ficou mais bonita.
-Tu és o meu sorriso favorito, o meu abraço seguro,
-e a melhor parte de todos os meus dias.
+// CONTADOR
+const startDate = new Date("2024-11-05");
+function updateCounter(){
+  const now = new Date();
+  const diff = now - startDate;
+  const days = Math.floor(diff/(1000*60*60*24));
+  document.getElementById("counter").innerText =
+  "Estamos juntos há " + days + " dias ❤️";
+}
+updateCounter();
+setInterval(updateCounter,1000);
 
-Eu amo-te mais do que alguma vez consegui explicar. ❤️`;
-
+// TEXTO LETRA A LETRA
+const text = "Desde o dia 5 de novembro de 2024 que a minha vida ficou mais bonita. Cada sorriso teu é o meu lugar favorito no mundo. Queres continuar esta história comigo para sempre?";
 let i=0;
 function typeWriter(){
   if(i<text.length){
-    document.getElementById("typed").innerHTML+=text.charAt(i);
+    document.getElementById("typing").innerHTML+=text.charAt(i);
     i++;
     setTimeout(typeWriter,40);
-  } else {
-    document.getElementById("question").classList.add("show");
-    document.getElementById("buttons").style.display="block";
   }
 }
 typeWriter();
 
-// Contador
-const startDate=new Date("2024-11-05");
-const now=new Date();
-const diff=now-startDate;
-const days=Math.floor(diff/(1000*60*60*24));
-document.getElementById("counter").innerHTML=`Estamos juntos há ${days} dias ❤️`;
-
-// Música
-function playMusic(){
-  document.getElementById("music").play();
-}
-
-// Botão que foge
-const runBtn=document.getElementById("runBtn");
+// BOTÃO QUE FOGE MAIS RÁPIDO
+const runBtn = document.getElementById("runBtn");
 runBtn.addEventListener("mouseover",()=>{
-  runBtn.style.top=Math.random()*60+"px";
-  runBtn.style.left=Math.random()*200+"px";
+  const container=document.querySelector(".buttons");
+  const maxX=container.offsetWidth-runBtn.offsetWidth;
+  const maxY=container.offsetHeight-runBtn.offsetHeight;
+  runBtn.style.position="absolute";
+  runBtn.style.left=Math.random()*maxX+"px";
+  runBtn.style.top=Math.random()*maxY+"px";
 });
 
-// Explosão de corações
-function celebrar(){
-  for(let i=0;i<40;i++){
-    let heart=document.createElement("div");
-    heart.className="heart";
+// EXPLOSÃO DE CORAÇÕES
+function explodeHearts(){
+  document.getElementById("finalMessage").style.display="block";
+  for(let i=0;i<50;i++){
+    const heart=document.createElement("div");
+    heart.classList.add("heart");
     heart.innerHTML="❤️";
-    heart.style.left=(window.innerWidth/2)+"px";
-    heart.style.top=(window.innerHeight/2)+"px";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*30+20)+"px";
     document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),2000);
+    setTimeout(()=>heart.remove(),3000);
   }
+}
+
+// MÚSICA
+function playMusic(){
+  document.getElementById("music").play();
 }
 </script>
 
